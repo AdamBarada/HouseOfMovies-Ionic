@@ -1,0 +1,99 @@
+<ngx-spinner [disableAnimation]="true"></ngx-spinner>
+<ng-template #template2>
+    <div class="modal-body mx-auto confirm-modal">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-1 ml-0 pl-0">
+                    <fa-icon [icon]="faMinusCircle" class="icon-danger pr-2"></fa-icon>
+                </div>
+                <div class="col-11 my-auto">
+                    <p class="confirm-title pl-1">
+                        Delete Screening</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 offset-1">
+                    <p class="confirm-text pl-1  pb-2"> Are you sure you want to proceed? Deleting a screening cannot be undone.</p>
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col-5 offset-1">
+                    <button class="button-confirm" (click)="onDeleteScreening(currentScreening)">Delete</button>
+                </div>
+                <div class="col-5 mr-2 pl-0">
+                    <button class="button-reject" (click)="decline()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Screenings
+        </ion-title>
+        <ion-buttons slot="start">
+            <ion-menu-button autoHide="false">
+            </ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="6" class="my-auto">
+                <p class="bold"><span class="color-hint">Swipe </span>screening to delete, <span class="color-hint">click</span> to edit. </p>
+            </ion-col>
+            <ion-col offset="1" size="5">
+                <ion-button routerLink="/admin/screenings/add" class="text-normal" color="tertiary" size="medium">
+                    <ion-icon slot="start" name="add"></ion-icon>
+                    Add Screening
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-item-sliding *ngFor="let screening of showedScreenings" #slidingMovies>
+            <ion-item class="mb-2 mt-1" (click)="onEditScreening(screening.id, undefined)" color="primary" lines="none">
+                <ion-col size="3" class="my-auto">
+                    <div class="wrapper">
+                        <img class="img-style" src="{{screening.movie.landscapeImg}}">
+                        <ion-icon name="play-circle-outline" class="centered" (click)="onEditScreening(screening.id, screening.movie.trailer)"></ion-icon>
+                    </div>
+                </ion-col>
+                <ion-col size="9" class="my-auto">
+                    <ion-row>
+                        <ion-col size="12" class="pb-0">
+                            <p class="m-0 font-title left">{{screening.movie.title | shorten: 20}} </p> <span class="pl-2 info font-sm mt-1" [class.upcoming]="screening.status === 'AVAILABLE'" [class.started]="screening.status !== 'AVAILABLE'"> {{screening.status === "AVAILABLE" ? 'Upcoming' : 'Started'}} </span>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="4" class="pr-0">
+                            <p class="m-0 font-sm"> {{screening.date | date}} </p>
+                        </ion-col>
+                        <ion-col size="1" class="ion-text-center pr-0 pl-0">
+                            <p class="m-0 font-sm"> &#9679; </p>
+                        </ion-col>
+                        <ion-col size="3" class="ion-text-center pr-0 pl-0">
+                            <p class="m-0 font-sm"> {{screening.date | date:'shortTime'}}</p>
+                        </ion-col>
+                        <ion-col size="1" class="ion-text-center pr-0 pl-0">
+                            <p class="m-0 font-sm"> &#9679;</p>
+                        </ion-col>
+                        <ion-col size="3" class="ion-text-center pl-0">
+                            <p class="m-0 font-sm"> {{screening.room.name}}</p>
+                        </ion-col>
+
+                    </ion-row>
+                </ion-col>
+            </ion-item>
+            <ion-item-options>
+                <ion-item-option class="mb-3 mt-3" color="danger">
+                    <ion-icon name="trash" slot="icon-only" (click)="openModal(template2, screening.id, slidingMovies)"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+        <ion-infinite-scroll [disabled]="screenings.length === showedScreenings.length" threshold="100px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more screenings...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,27 @@
+ion-item {
+    --background: transparent;
+}
+
+.active {
+    background-color: var(--ion-color-secondary);
+}
+
+ion-list {
+    --ion-item-background: transparent;
+    --ion-background-color: transparent;
+}
+
+ion-icon {
+    color: white;
+}
+
+.spacing {
+    width: 100%;
+    height: 0.3rem;
+}
+
+.logo-img {
+    transform: rotate(0deg) !important;
+    width: 70%;
+    height: 40px;
+}

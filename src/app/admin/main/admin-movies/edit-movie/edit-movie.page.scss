@@ -1,0 +1,273 @@
+ion-content {
+    --background: var(--ion-color-secondary) !important;
+}
+
+.form-icon {
+    font-size: 1rem;
+    color: var(--ion-color-blue-hint);
+    margin: auto;
+}
+
+.color-blue {
+    background-color: var(--ion-color-tertiary)
+}
+
+fa-icon {
+    cursor: pointer;
+    color: var(--ion-color-tertiary);
+    font-size: 30px;
+}
+
+.icon-success {
+    color: var(--ion-color-success);
+}
+
+.container {
+    background-color: var(--ion-color-primary);
+}
+
+.break-line {
+    height: 1px;
+    background-color: var(--ion-color-secondary);
+}
+
+.color-hint {
+    color: var(--ion-color-blue-hint);
+}
+
+.color-danger {
+    background-color: var(--ion-color-step-450);
+}
+
+.white {
+    color: white;
+}
+
+.color-success {
+    background-color: var(--ion-color-success);
+}
+
+.btn-custom {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    font-size: 0.9rem;
+    outline: none;
+    color: white;
+    border: 0;
+    padding: 20px 0px;
+}
+
+.icon-danger {
+    color: var(--ion-color-danger);
+    font-size: 30px;
+    vertical-align: middle;
+    padding: 0;
+}
+
+.confirm-title {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 18px;
+    margin: 0;
+}
+
+.button-confirm {
+    background-color: var(--ion-color-tertiary);
+    padding: 8px 0px;
+    color: white;
+    border: 2px solid var(--ion-color-tertiary);
+    width: 100%;
+    border-radius: 10px;
+    outline: none;
+}
+
+.button-reject {
+    background-color: transparent;
+    padding: 8px 0px;
+    width: 100%;
+    color: var(--ion-color-step-450);
+    border: 2px solid var(--ion-color-step-450);
+    border-radius: 10px;
+    outline: none;
+}
+
+.confirm-text {
+    vertical-align: middle;
+    color: var(--ion-color-step-450);
+}
+
+input[type="file"] {
+    display: none;
+}
+
+input[type="file"]+label {
+    font-size: 0.9rem;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    cursor: pointer;
+}
+
+
+/* form styling */
+
+label {
+    color: white;
+}
+
+.padding-add {
+    padding-top: 0.7rem;
+}
+
+input,
+ng-multiselect-dropdown {
+    border: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    caret-color: var(--ion-color-tertiary);
+}
+
+ng-multiselect-dropdown {
+    padding: 0 0.75em !important;
+}
+
+::ng-deep span.dropdown-btn {
+    border: none !important;
+    outline: none !important;
+}
+
+::ng-deep .multiselect-item-checkbox input+div {
+    color: white !important;
+}
+
+::ng-deep input {
+    background: transparent !important;
+    color: white !important;
+}
+
+::ng-deep .multiselect-dropdown .dropdown-btn .selected-item,
+::ng-deep .multiselect-dropdown .dropdown-btn .selected-item:focus,
+ng-deep .multiselect-dropdown .dropdown-btn .selected-item:hover {
+    background: var(--ion-color-tertiary) !important;
+    padding: 2px 5px !important;
+    border-radius: 5px !important;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+::ng-deep .dropdown-list .filter-textbox,
+::ng-deep .dropdown-list li {
+    border: none !important;
+    border-bottom: 1px solid var(--ion-color-primary) !important;
+}
+
+::ng-deep .multiselect-item-checkbox input+div:before,
+ng-deep .multiselect-item-checkbox input+div:checked {
+    border-radius: 2px !important;
+    border: 2px solid var(--ion-color-tertiary) !important;
+    color: var(--ion-color-tertiary) !important;
+}
+
+::ng-deep .dropdown-list,
+.dropdown-list:focus {
+    background: var(--ion-color-secondary) !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+::ng-deep .multiselect-item-checkbox:hover {
+    background: var(--ion-color-secondary) !important;
+}
+
+input[type=checkbox] {
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 5px;
+}
+
+textarea {
+    color: white;
+    font-size: 0.9rem;
+    resize: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 9px 20px 5px 20px;
+    caret-color: var(--ion-color-tertiary) !important;
+}
+
+input,
+.font-sm {
+    font-size: 0.9rem;
+}
+
+.textarea-cust {
+    margin: inherit;
+    margin-top: 0.5rem;
+}
+
+input[type=submit] {
+    color: white;
+    padding: 5px 20px 5px 20px;
+}
+
+.form-control {
+    color: white;
+}
+
+.container {
+    background-color: var(--ion-color-primary);
+}
+
+.main-container {
+    height: 70vh;
+}
+
+.input-style {
+    background-color: transparent;
+    border: 1px solid var(--ion-color-secondary);
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.input-style:hover,
+.input-style:focus-within {
+    border: 1px solid var(--ion-color-tertiary);
+}
+
+.errorClass,
+.errorClass:hover,
+.errorClass:focus-within {
+    border: 1px solid red;
+}
+
+.rounded-edges {
+    border-radius: 10px;
+}
+
+.rounded-edges-l {
+    border-radius: 20px 0px 0px 20px;
+}
+
+.bottom-pos {
+    position: absolute;
+    left: 15px;
+    width: 100%;
+    bottom: 0;
+}
+
+.space-between-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 0% 15% 7% 15%;
+}
+
+.background-primary {
+    background-color: var(--ion-color-primary);
+}

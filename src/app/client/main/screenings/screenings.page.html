@@ -1,0 +1,88 @@
+<ngx-spinner [disableAnimation]="true"></ngx-spinner>
+<ng-template #template2>
+    <div class="modal-body mx-auto confirm-modal">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-1 ml-0 pl-0">
+                    <fa-icon [icon]="faMinusCircle" class="icon-danger pr-2"></fa-icon>
+                </div>
+                <div class="col-11 my-auto">
+                    <p class="confirm-title pl-1">
+                        Reservation not allowed</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 offset-1">
+                    <p class="confirm-text pl-1"> Seats reservation requires you to login to your account. Do you want to login?</p>
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col-5 offset-1">
+                    <button class="button-confirm" routerLink="/auth/login" (click)="confirm()">Login</button>
+                </div>
+                <div class="col-5 mr-2 pl-0">
+                    <button class="button-reject" (click)="decline()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ion-content *ngIf="showedScreenings.length !== 0 && screenings.length !== 0">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+        <ion-row class="ion-no-padding header-style pt-3">
+            <ion-col size="12" class="ion-text-center pb-0">
+                <p class="title m-0"> Screenings {{show ? "Test" : ''}} </p>
+            </ion-col>
+            <ion-col size="12" class="ion-text-center p-0">
+                <p class="font-title gray m-0 pb-2">{{screenings?.length}} available screenings.</p>
+            </ion-col>
+        </ion-row>
+        <ion-row class="mb-2 mt-1" *ngFor="let screening of showedScreenings">
+            <ion-col size="3" class="my-auto">
+                <div class="wrapper">
+                    <img class="img-style" src="{{screening.movie.landscapeImg}}">
+                    <ion-icon name="play-circle-outline" class="centered" (click)="openTrailer(screening.movie.trailer)"></ion-icon>
+                </div>
+            </ion-col>
+            <ion-col size="8" class="my-auto">
+                <ion-row>
+                    <ion-col size="12" class="pb-0">
+                        <p class="m-0 font-title left">{{screening.movie.title | shorten: 20}} </p> <span class="pl-2 info font-sm mt-1" [class.upcoming]="screening.status === 'AVAILABLE'" [class.started]="screening.status !== 'AVAILABLE'"> {{screening.status === "AVAILABLE" ? 'Upcoming' : 'Started'}} </span>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="4" class="pr-0">
+                        <p class="m-0 font-sm"> {{screening.date | date}} </p>
+                    </ion-col>
+                    <ion-col size="1" class="ion-text-center pr-0 pl-0">
+                        <p class="m-0 font-sm"> &#9679; </p>
+                    </ion-col>
+                    <ion-col size="3" class="ion-text-center pr-0 pl-0">
+                        <p class="m-0 font-sm"> {{screening.date | date:'shortTime'}}</p>
+                    </ion-col>
+                    <ion-col size="1" class="ion-text-center pr-0 pl-0">
+                        <p class="m-0 font-sm"> &#9679;</p>
+                    </ion-col>
+                    <ion-col size="3" class="ion-text-center pl-0">
+                        <p class="m-0 font-sm"> {{screening.room.name}}</p>
+                    </ion-col>
+
+                </ion-row>
+            </ion-col>
+            <ion-col size="1" class="my-auto">
+                <ion-icon *ngIf="isAuth" name="chevron-forward-outline" routerLink="/screenings/{{screening.id}}">
+                </ion-icon>
+                <ion-icon *ngIf="!isAuth" name="chevron-forward-outline" (click)="openModal(template2)">
+                </ion-icon>
+            </ion-col>
+        </ion-row>
+        <ion-infinite-scroll [disabled]="screenings.length === showedScreenings.length" threshold="100px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more screenings...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+    </ion-grid>
+</ion-content>

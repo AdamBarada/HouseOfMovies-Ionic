@@ -1,0 +1,45 @@
+<ion-app>
+    <ion-content>
+        <ion-grid class="ion-no-padding">
+            <div class="ion-row">
+                <div class="ion-col my-auto">
+                    <ion-row class="custom-container">
+                        <ion-col class="bg-image">
+                            <ion-row>
+                                <ion-col>
+                                    <ion-img class="ion-padding" src="../../assets/images/logo.png"></ion-img>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row class="pb-2">
+                                <div class="ion-col ion-padding ion-margin-bottom">
+                                    <ngx-typed-js [cursorColor]="['#788DF8']" [strings]="['More than 20 movie screenings per day.','Book your favorite movie online.','Pick your movie, your time, your day.']" [typeSpeed]="75" backDelay="500" [backSpeed]="25" loop=”true”>
+                                        <p class="typing ion-padding-bottom ion-margin-bottom">
+                                        </p>
+                                    </ngx-typed-js>
+                                </div>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col size="4" class="ion-text-left">
+                                    <a routerLink="/home">
+                                        <p>Home</p>
+                                    </a>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-center">
+                                    <a routerLink="/screenings">
+                                        <p>Screenings</p>
+                                    </a>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-right">
+                                    <a routerLink="/movies">
+                                        <p>Movies</p>
+                                    </a>
+                                </ion-col>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row>
+                </div>
+            </div>
+            <router-outlet></router-outlet>
+        </ion-grid>
+    </ion-content>
+</ion-app>

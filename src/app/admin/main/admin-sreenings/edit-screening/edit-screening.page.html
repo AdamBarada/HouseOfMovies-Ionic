@@ -1,0 +1,75 @@
+<ngx-spinner [disableAnimation]="true"></ngx-spinner>
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Edit Screening</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="admin/screenings"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12">
+                <div class="col-lg-4 mt-5 background-primary shadow">
+                    <div class="col-12 pl-0 pt-3 pb-3">
+                        <p class="m-0">
+                            Edit the following form
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col break-line"></div>
+                    </div>
+                    <form #f="ngForm" *ngIf="dropdownMovieList?.length !== 0 && selectedScreeningItems?.length !== 0 && selectedMovieItems?.length !== 0" class="pt-3" (ngSubmit)="(f.valid && isTimeValid) ? onSubmit(f) : onFormNotValid()">
+                        <div class="row pb-3">
+                            <div class="col-12">
+                                <div class="input-group input-style my-auto pr-3 pl-3" [ngClass]="{errorClass : (!movieCtrl.valid && movieCtrl.touched)}">
+                                    <fa-icon [icon]="faFilm" class="form-icon"></fa-icon>
+                                    <ng-multiselect-dropdown class="form-control" name="movie" [(ngModel)]="selectedMovieItems" [placeholder]="'Select Movie'" required ngModel #movieCtrl="ngModel" [settings]="dropdownSettings" [data]="dropdownMovieList">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pb-3">
+                            <div class="col-12 col-md-6 pb-3">
+                                <div class="input-group input-style h-100 pr-3 pl-3" [ngClass]="{errorClass : (!dateCtrl.valid && dateCtrl.touched)}">
+                                    <fa-icon [icon]="faCalendarDay" class="form-icon"></fa-icon>
+                                    <input type="text" class="form-control" #dateCtrl=ngModel required placeholder="Screening Date" [(ngModel)]="selectedDate" [bsConfig]="{ isAnimated: true, dateInputFormat: 'MMMM Do YYYY'}" bsDatepicker name="date" ngModel>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 my-auto">
+                                <div class="input-group input-style pr-3 pl-3">
+                                    <fa-icon [icon]="faDollar" class="form-icon"></fa-icon>
+                                    <input type="number" ngModel class="form-control" [(ngModel)]="screening.price" name="price" #durationCtrl="ngModel" required autocomplete="off" placeholder="Price in $" class="form-control"> </div>
+                            </div>
+                        </div>
+                        <div class="row pb-3">
+                            <div class="col-12 col-md-6 pb-3">
+                                <div class="input-group input-style h-100 pr-3 pl-3" [ngClass]="{errorClass : (!isTimeValid)}">
+                                    <fa-icon [icon]="faCalendarDay" class="form-icon"></fa-icon>
+                                    <timepicker #timeCtrl=ngModel required placeholder="Screening Time" [(ngModel)]="selectedTime" (isValid)="setValid($event)" name="time" ngModel class="form-control pt-0 pb-0 " [showSpinners]="false"></timepicker>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 pb-3 my-auto">
+                                <div class="input-group input-style my-auto pr-3 pl-3" [ngClass]="{errorClass : (!roomCtrl.valid && roomCtrl.touched)}">
+                                    <fa-icon [icon]="faDoorOpen" class="form-icon"></fa-icon>
+                                    <ng-multiselect-dropdown class="form-control" name="room" [(ngModel)]="selectedScreeningItems" [placeholder]="'Select Room'" required ngModel #roomCtrl="ngModel" [settings]="dropdownSettings" [data]="dropdownRoomList">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 p-0">
+                                <button (click)="reset(f)" type="button" class="btn-custom color-danger"><fa-icon [icon]="faTrash" class="form-icon white pr-2"></fa-icon> Discard Changes</button>
+                            </div>
+                            <div class="col-6 p-0">
+                                <button type="submit" class="btn-custom color-blue"><fa-icon [icon]="faCheck" class="form-icon white pr-2"></fa-icon> Confirm Changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

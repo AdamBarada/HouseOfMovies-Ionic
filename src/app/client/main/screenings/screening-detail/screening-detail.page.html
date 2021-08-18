@@ -1,0 +1,191 @@
+<ngx-spinner [disableAnimation]="true"></ngx-spinner>
+<ng-template #template2>
+    <div class="modal-body mx-auto confirm-modal">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-1 ml-0 pl-0">
+                    <fa-icon [icon]="faCircleCheck" class="icon-success pr-2"></fa-icon>
+                </div>
+                <div class="col-11 my-auto">
+                    <p class="confirm-title pl-1">
+                        Reservation successful</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 offset-1">
+                    <p class="confirm-text pl-1"> Reservation was successfully made. Do you want to access your tickets? </p>
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col-5 offset-1">
+                    <button class="button-confirm" routerLink="/ticket" [queryParams]="{id: reservation.id}" (click)="confirm()">View</button>
+                </div>
+                <div class="col-5 mr-2 pl-0">
+                    <button class="button-reject" (click)="decline()">Discard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ion-content>
+    <ion-grid *ngIf="screening !== undefined" class="ion-no-padding">
+        <section class="main-container">
+            <ion-card class="ion-no-margin background img-container" *ngIf="screening.movie.landscapeImg" [style.background]=" 'linear-gradient(rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 20%, rgba(0,0,0,.6) 50%, rgba(0,0,0,0.9) 100% ), url(' + screening.movie.landscapeImg +')' ">
+                <ion-row>
+                    <ion-col size="1">
+                        <ion-back-button class="color-white" defaultHref="screenings"></ion-back-button>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="pt-5">
+                    <ion-col class="text-left pl-3 pt-1" size="12">
+                        <p class="movie-title m-0 pt-3"> {{screening.movie.title | shorten: 20}}
+                            <span class="align-middle pl-2" (click)="openTrailer(screening.movie.trailer)"><ion-icon name="play"></ion-icon></span>
+                        </p>
+                    </ion-col>
+                    <ion-col size="12" class="text-left pl-3">
+                        <p>{{screening.movie.duration}} mins <span class="dot pr-2 pl-2">&#9679;</span> {{screening.movie.releaseDate | date: 'y'}}</p>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+            <ion-row class="pt-3 pl-4 pb-2 pr-4">
+                <ion-col class="pt-3 pb-3">
+                    <div class="content-test text-center">
+                        <p class="screen">S C R E E N</p>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row class="pb-1" *ngFor="let item of [].constructor(screening?.room?.nbRows); let i = index">
+                <ion-col class="d-flex ion-justify-content-between pl-4 pr-4">
+                    <svg *ngFor="let item of [].constructor(screening?.room?.nbColumns); let j = index" (click)="onSelect(i,j)" [ngStyle]="setStyle(i,j)" version="1.0" xmlns="http://www.w3.org/2000/svg" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
+                        preserveAspectRatio="none">
+              <g  transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+stroke="none">
+<path class="svg" d="M1833 4360 c-116 -23 -234 -117 -287 -229 l-31 -66 -3 -973 c-3
+-1084 -7 -1011 67 -1032 24 -8 346 -10 1004 -8 l969 3 29 33 29 33 -2 972 -3
+972 -31 66 c-55 115 -165 201 -292 228 -63 13 -1382 14 -1449 1z"/>
+<path class="svg" d="M970 2823 c-8 -3 -27 -17 -42 -31 l-28 -26 0 -599 c0 -391 4 -605 10
+-618 21 -39 62 -49 192 -49 139 0 164 8 190 60 17 32 18 81 17 600 0 410 -3
+575 -12 600 -19 56 -59 70 -197 69 -63 0 -122 -3 -130 -6z"/>
+<path class="svg" d="M3872 2815 c-62 -28 -62 -23 -62 -652 0 -521 1 -571 18 -603 26 -52
+51 -60 190 -60 130 0 171 10 192 49 6 13 10 227 10 618 l0 599 -31 30 c-30 29
+-32 29 -157 32 -95 1 -135 -2 -160 -13z"/>
+<path class="svg" d="M1558 1834 c-42 -22 -48 -43 -48 -163 0 -102 2 -112 24 -138 l24 -28
+992 -3 992 -2 34 34 34 34 0 101 c0 111 -10 146 -51 167 -43 22 -1961 20
+-2001 -2z"/>
+<path class="svg" d="M924 1256 l-35 -35 3 -205 3 -206 28 -27 27 -28 1578 -3 c867 -1
+1592 0 1611 3 18 4 44 18 57 32 24 26 24 28 24 234 0 205 0 208 -24 236 l-24
+28 -1607 3 -1607 2 -34 -34z"/>
+              </g>
+            </svg>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="12" class="ion-justify-content-between pl-5 pt-4 mb-3 pr-5 d-flex">
+                    <p class="font-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="svg-selected" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="none">
+                <g  transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
+<path d="M1833 4360 c-116 -23 -234 -117 -287 -229 l-31 -66 -3 -973 c-3
+-1084 -7 -1011 67 -1032 24 -8 346 -10 1004 -8 l969 3 29 33 29 33 -2 972 -3
+972 -31 66 c-55 115 -165 201 -292 228 -63 13 -1382 14 -1449 1z"/>
+<path d="M970 2823 c-8 -3 -27 -17 -42 -31 l-28 -26 0 -599 c0 -391 4 -605 10
+-618 21 -39 62 -49 192 -49 139 0 164 8 190 60 17 32 18 81 17 600 0 410 -3
+575 -12 600 -19 56 -59 70 -197 69 -63 0 -122 -3 -130 -6z"/>
+<path d="M3872 2815 c-62 -28 -62 -23 -62 -652 0 -521 1 -571 18 -603 26 -52
+51 -60 190 -60 130 0 171 10 192 49 6 13 10 227 10 618 l0 599 -31 30 c-30 29
+-32 29 -157 32 -95 1 -135 -2 -160 -13z"/>
+<path d="M1558 1834 c-42 -22 -48 -43 -48 -163 0 -102 2 -112 24 -138 l24 -28
+992 -3 992 -2 34 34 34 34 0 101 c0 111 -10 146 -51 167 -43 22 -1961 20
+-2001 -2z"/>
+<path d="M924 1256 l-35 -35 3 -205 3 -206 28 -27 27 -28 1578 -3 c867 -1
+1592 0 1611 3 18 4 44 18 57 32 24 26 24 28 24 234 0 205 0 208 -24 236 l-24
+28 -1607 3 -1607 2 -34 -34z"/>
+                </g>
+              </svg> Selected
+                    </p>
+                    <p class="font-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="512.000000pt" class="svg-available" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="none">
+                  <g  transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
+<path d="M1833 4360 c-116 -23 -234 -117 -287 -229 l-31 -66 -3 -973 c-3
+-1084 -7 -1011 67 -1032 24 -8 346 -10 1004 -8 l969 3 29 33 29 33 -2 972 -3
+972 -31 66 c-55 115 -165 201 -292 228 -63 13 -1382 14 -1449 1z"/>
+<path d="M970 2823 c-8 -3 -27 -17 -42 -31 l-28 -26 0 -599 c0 -391 4 -605 10
+-618 21 -39 62 -49 192 -49 139 0 164 8 190 60 17 32 18 81 17 600 0 410 -3
+575 -12 600 -19 56 -59 70 -197 69 -63 0 -122 -3 -130 -6z"/>
+<path d="M3872 2815 c-62 -28 -62 -23 -62 -652 0 -521 1 -571 18 -603 26 -52
+51 -60 190 -60 130 0 171 10 192 49 6 13 10 227 10 618 l0 599 -31 30 c-30 29
+-32 29 -157 32 -95 1 -135 -2 -160 -13z"/>
+<path d="M1558 1834 c-42 -22 -48 -43 -48 -163 0 -102 2 -112 24 -138 l24 -28
+992 -3 992 -2 34 34 34 34 0 101 c0 111 -10 146 -51 167 -43 22 -1961 20
+-2001 -2z"/>
+<path d="M924 1256 l-35 -35 3 -205 3 -206 28 -27 27 -28 1578 -3 c867 -1
+1592 0 1611 3 18 4 44 18 57 32 24 26 24 28 24 234 0 205 0 208 -24 236 l-24
+28 -1607 3 -1607 2 -34 -34z"/>
+                  </g>
+                </svg> Available
+                    </p>
+                    <p class="font-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="svg-taken" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="none">
+                  <g  transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
+<path d="M1833 4360 c-116 -23 -234 -117 -287 -229 l-31 -66 -3 -973 c-3
+-1084 -7 -1011 67 -1032 24 -8 346 -10 1004 -8 l969 3 29 33 29 33 -2 972 -3
+972 -31 66 c-55 115 -165 201 -292 228 -63 13 -1382 14 -1449 1z"/>
+<path d="M970 2823 c-8 -3 -27 -17 -42 -31 l-28 -26 0 -599 c0 -391 4 -605 10
+-618 21 -39 62 -49 192 -49 139 0 164 8 190 60 17 32 18 81 17 600 0 410 -3
+575 -12 600 -19 56 -59 70 -197 69 -63 0 -122 -3 -130 -6z"/>
+<path d="M3872 2815 c-62 -28 -62 -23 -62 -652 0 -521 1 -571 18 -603 26 -52
+51 -60 190 -60 130 0 171 10 192 49 6 13 10 227 10 618 l0 599 -31 30 c-30 29
+-32 29 -157 32 -95 1 -135 -2 -160 -13z"/>
+<path d="M1558 1834 c-42 -22 -48 -43 -48 -163 0 -102 2 -112 24 -138 l24 -28
+992 -3 992 -2 34 34 34 34 0 101 c0 111 -10 146 -51 167 -43 22 -1961 20
+-2001 -2z"/>
+<path d="M924 1256 l-35 -35 3 -205 3 -206 28 -27 27 -28 1578 -3 c867 -1
+1592 0 1611 3 18 4 44 18 57 32 24 26 24 28 24 234 0 205 0 208 -24 236 l-24
+28 -1607 3 -1607 2 -34 -34z"/>
+                  </g>
+                </svg> Taken
+                    </p>
+                </ion-col>
+            </ion-row>
+        </section>
+        <section class="info">
+            <ion-row class="pt-4">
+                <ion-col size="2" class="pl-4 mt-auto">
+                    <fa-icon [icon]="faFilm"></fa-icon>
+                </ion-col>
+                <ion-col size="10" class="font-sm pl-0">
+                    <p class="mt-0 mb-0 mr-0 reposition">{{screening.movie.title}}</p>
+                </ion-col>
+            </ion-row>
+            <ion-row class="pt-4">
+                <ion-col size="3" class="text-center">
+                    <p class="font-sm bold color-hint">{{screening.date | date: 'MMMM d'}}</p>
+                    <p class="font-xsm">Date</p>
+                </ion-col>
+                <ion-col size="3" class="text-center">
+                    <p class="font-sm bold color-hint">{{screening.date | date: 'shortTime'}}</p>
+                    <p class="font-xsm">Time</p>
+                </ion-col>
+                <ion-col size="3" class="text-center">
+                    <p class="font-sm bold color-hint"> {{screening.room.name}} </p>
+                    <p class="font-xsm">Room</p>
+                </ion-col>
+                <ion-col size="3" class="text-center">
+                    <p class="font-sm bold color-hint">{{totalSeats}}</p>
+                    <p class="font-xsm">Seats</p>
+                </ion-col>
+            </ion-row>
+            <ion-row class="pt-4">
+                <ion-col size="6" class="pl-4">
+                    <p class="font-xsm m-0"> Total</p>
+                    <p class="font-xl color-currency">{{totalPrice | currency}}</p>
+                </ion-col>
+                <ion-col size="6" class="text-center button-style ion-activatable" [class.disabled]="totalSeats === 0" (click)="onAddReservation(template2)">
+                    <p class="font-xl m-0 pt-3"> Book Now
+                        <fa-icon class="pl-2" [icon]="rightArrow"></fa-icon>
+                    </p>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </ion-col>
+            </ion-row>
+        </section>
+    </ion-grid>
+</ion-content>

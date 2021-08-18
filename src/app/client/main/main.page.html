@@ -1,0 +1,30 @@
+<ion-app>
+    <form #f=ngForm (ngSubmit)="onSubmit(f)">
+        <ion-searchbar class="main" ngModel name="search" required placeholder="Search for available movies..." *ngIf="isClicked" [@enterAnimation] [class.show]="isClicked"></ion-searchbar>
+    </form>
+    <ion-content>
+        <ion-tabs>
+            <ion-tab-bar slot="bottom" lines="none">
+                <ion-tab-button tab="home">
+                    <ion-icon name="home" routerLinkActive="active"></ion-icon>
+                </ion-tab-button>
+                <ion-tab-button (click)="openSheet()">
+                    <ion-icon name="search"></ion-icon>
+                </ion-tab-button>
+                <ion-tab-button tab="movies">
+                    <ion-icon name="videocam" routerLinkActive="active"></ion-icon>
+                </ion-tab-button>
+                <ion-tab-button *ngIf="isAuth" tab="reservations">
+                    <ion-icon name="ticket" routerLinkActive="active"></ion-icon>
+                </ion-tab-button>
+                <ion-tab-button tab="screenings">
+                    <ion-icon name="tv" routerLinkActive="active"></ion-icon>
+                </ion-tab-button>
+                <ion-tab-button tab="auth/login">
+                    <ion-icon *ngIf="!isAuth" name="log-in" routerLinkActive="active"></ion-icon>
+                    <ion-icon *ngIf="isAuth" name="log-out" routerLinkActive="active"></ion-icon>
+                </ion-tab-button>
+            </ion-tab-bar>
+        </ion-tabs>
+    </ion-content>
+</ion-app>

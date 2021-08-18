@@ -1,0 +1,17 @@
+:host {
+    ion-searchbar {
+        --border-radius: 0;
+        --box-shadow: none;
+        --clear-button-color: transparent !important;
+    }
+    ion-tab-bar {
+        border: 0 !important;
+        margin-top: -1px !important;
+        --color-selected: var(--ion-color-tertiary) !important;
+    }
+}
+
+input.searchbar-input.sc-ion-searchbar-md {
+    border: 0 !important;
+    box-shadow: none !important;
+}

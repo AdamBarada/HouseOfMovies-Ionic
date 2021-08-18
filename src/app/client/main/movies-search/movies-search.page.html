@@ -1,0 +1,48 @@
+<ngx-spinner [disableAnimation]="true"></ngx-spinner>
+<ion-content *ngIf="movies.length !== 0">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+        <ion-row class="ion-no-padding header-style pt-3">
+            <ion-col size="1">
+                <ion-back-button class="color-white z-index" defaultHref="home"></ion-back-button>
+            </ion-col>
+            <ion-col size="11" class="ion-text-center pb-0">
+                <ion-row class="pos">
+                    <ion-col size="12" class="p-0">
+                        <p class="title m-0"> Results for {{searchString}} </p>
+                    </ion-col>
+                    <ion-col size="12" class="p-0">
+                        <p class="font-title gray m-0 pb-2">{{movies?.length}} available movies.</p>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let movie of movies" class="mb-3 mt-3">
+            <ion-col size="3">
+                <div class="wrapper">
+                    <img class="img-style" src="{{movie.portraitImg}}">
+                    <ion-icon name="play-circle-outline" class="centered" (click)="openTrailer(movie.trailer)"></ion-icon>
+                </div>
+            </ion-col>
+            <ion-col size="9" class="mt-1 pt-0">
+                <ion-row>
+                    <ion-col size="12" class="pb-0 pt-0 my-auto">
+                        <p class="m-0 font-movie-title left">{{movie.title | shorten: 15}} <span class="pr-2 pl-2"> &#9679; </span> {{movie.releaseDate | date: 'y'}} </p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="12">
+                        <p class="m-0"><span class="background-blue font-sm category-container mr-2" *ngFor="let category of movie.categories">{{category.name}}</span></p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="12" class="pr-0">
+                        <p class="m-0 font-sm pr-2" align="justify"> {{movie.description | shorten: 55}} <span class="color-hint pl-2" routerLink="/movies/{{movie.id}}">More Details</span> </p>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

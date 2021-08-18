@@ -1,0 +1,62 @@
+<ngx-spinner [disableAnimation]="true"></ngx-spinner>
+<ion-content>
+    <ion-grid *ngIf="movie !== undefined" class="ion-no-padding">
+        <ion-card class="ion-no-margin background img-container" *ngIf="movie.landscapeImg" [style.background]=" 'linear-gradient(rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 20%, rgba(0,0,0,.6) 50%, rgba(0,0,0,0.9) 100% ), url(' + movie.landscapeImg +')' ">
+            <ion-row>
+                <ion-col size="1">
+                    <ion-back-button class="color-white" defaultHref="movies"></ion-back-button>
+                </ion-col>
+            </ion-row>
+            <ion-row class="pt-5">
+                <ion-col class="text-left pl-3 pt-1" size="12">
+                    <p class="movie-title m-0 pt-3"> {{movie.title | shorten: 20}}
+                        <span class="align-middle pl-2" (click)="openTrailer(movie.trailer)"><ion-icon name="play"></ion-icon></span>
+                    </p>
+                </ion-col>
+                <ion-col size="12" class="text-left pl-3">
+                    <p>{{movie.duration}} mins <span class="dot pr-2 pl-2">&#9679;</span> {{movie.releaseDate | date: 'y'}}</p>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+        <ion-row class="ion-padding">
+            <ion-col size="12">
+                <p> Director: <span class="blue-color pl-1 pr-2"> {{movie?.director | shorten: 20}} </span> | <span class="color-orange pl-2">{{movie?.viewers}} views </span> </p>
+            </ion-col>
+            <ion-col size="12">
+                <p><span class="background-blue category-container mr-2" *ngFor="let category of movie?.categories">{{category.name}}</span></p>
+            </ion-col>
+        </ion-row>
+        <ion-card class="ion-no-padding desc-container">
+            <ion-row class="pl-3">
+                <ion-col size="12">
+                    <p class="movie-title m-0"> Synopsis</p>
+                </ion-col>
+            </ion-row>
+            <ion-row class="ion-padding">
+                <ion-col size="12">
+                    <p align="justify">
+                        {{movie?.description}}
+                    </p>
+                </ion-col>
+            </ion-row>
+            <ion-row class="ion-padding">
+                <ion-col size="3">
+                    <p>
+                        <fa-icon [icon]="faUsers"></fa-icon> Cast:
+                    </p>
+                </ion-col>
+                <ion-col>
+                    <p>
+                        <span>{{movie?.cast}} </span>
+                    </p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="12">
+                    <ion-button expand="block" routerLink="/screenings-search" [queryParams]="{movie: movie?.title}">
+                        <ion-icon slot="start" name="eye"></ion-icon>View Screenings</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </ion-grid>
+</ion-content>

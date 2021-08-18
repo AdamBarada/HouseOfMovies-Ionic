@@ -1,0 +1,157 @@
+<ngx-spinner [disableAnimation]="true"></ngx-spinner>
+<ion-content>
+    <ion-grid class="ion-no-padding">
+        <ion-slides [options]="option" pager="true">
+            <ion-slide>
+                <ion-card class="ion-no-margin background" *ngIf="loadedMovies[31]?.landscapeImg" [style.background]=" 'linear-gradient(rgba(0,0,0,.5) 0%, rgba(0,0,0,.85) 50%, rgba(0,0,0,1) 100% ), url(' + loadedMovies[31]?.landscapeImg +')' ">
+                    <ion-row class="pt-5">
+                        <ion-col class="text-left pl-3 pt-5" size="12">
+                            <p class="movie-title m-0"> {{loadedMovies[31]?.title}}
+                                <span class="align-middle pl-2" (click)="openTrailer(loadedMovies[31]?.trailer)"><ion-icon name="play"></ion-icon></span>
+                            </p>
+                        </ion-col>
+                        <ion-col size="12" class="text-left pl-3">
+                            <p>{{loadedMovies[31]?.duration}} mins <span class="dot pr-2 pl-2">&#9679;</span> {{printCategories(loadedMovies[31]?.categories)}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-card>
+            </ion-slide>
+            <ion-slide>
+                <ion-card class="ion-no-margin background" *ngIf="loadedMovies[34]?.landscapeImg" [style.background]=" 'linear-gradient(rgba(0,0,0,.5) 0%, rgba(0,0,0,.85) 50%, rgba(0,0,0,1) 100% ), url(' + loadedMovies[34]?.landscapeImg +')' ">
+                    <ion-row class="pt-5">
+                        <ion-col class="text-left pl-3 pt-5" size="12">
+                            <p class="movie-title m-0"> {{loadedMovies[34]?.title}}
+                                <span class="align-middle pl-2" (click)="openTrailer(loadedMovies[34]?.trailer)"><ion-icon name="play"></ion-icon></span>
+                            </p>
+                        </ion-col>
+                        <ion-col size="12" class="text-left pl-3">
+                            <p>{{loadedMovies[34]?.duration}} mins <span class="dot pr-2 pl-2">&#9679;</span> {{printCategories(loadedMovies[31]?.categories)}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-card>
+            </ion-slide>
+            <ion-slide>
+                <ion-card class="ion-no-margin background" *ngIf="loadedMovies[51]?.landscapeImg" [style.background]=" 'linear-gradient(rgba(0,0,0,.5) 0%, rgba(0,0,0,.85) 50%, rgba(0,0,0,1) 100% ), url(' + loadedMovies[51]?.landscapeImg +')' ">
+                    <ion-row class="pt-5">
+                        <ion-col class="text-left pl-3 pt-5" size="12">
+                            <p class="movie-title m-0"> {{loadedMovies[51]?.title}}
+                                <span class="align-middle pl-2" (click)="openTrailer(loadedMovies[51]?.trailer)"><ion-icon name="play"></ion-icon></span>
+                            </p>
+                        </ion-col>
+                        <ion-col size="12" class="text-left pl-3">
+                            <p>{{loadedMovies[51]?.duration}} mins <span class="dot pr-2 pl-2">&#9679;</span> {{printCategories(loadedMovies[31]?.categories)}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+        <ion-row class="ion-padding">
+            <ion-col>
+                <p class="movie-title bold">
+                    Trending Now
+                </p>
+                <ion-col>
+                    <ion-slides [options]="cardOption">
+                        <ion-slide *ngFor="let movie of trendingMovies">
+                            <ion-row>
+                                <ion-col size="12" (click)="goToMovie(movie?.id)">
+                                    <div class="dark-overlay">
+                                        <img class="movie-card-img" src="{{movie?.portraitImg}}">
+                                    </div>
+                                </ion-col>
+                                <ion-col size="12">
+                                    <p class="sm bold ion-text-left m-0 pt-2">{{movie?.title | shorten: 15}}</p>
+                                </ion-col>
+                                <ion-col size="12">
+                                    <p class="sm blue-color ion-text-left m-0 pt-1">{{printCategories(movie?.categories) | shorten: 15}}</p>
+                                </ion-col>
+                            </ion-row>
+                        </ion-slide>
+                    </ion-slides>
+                </ion-col>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-padding">
+            <ion-col>
+                <p class="movie-title bold">
+                    Latest Movies
+                </p>
+                <ion-col>
+                    <ion-slides [options]="cardOption">
+                        <ion-slide *ngFor="let movie of loadedMovies.slice(0,8)">
+                            <ion-row>
+                                <ion-col size="12" (click)="goToMovie(movie?.id)">
+                                    <div class="dark-overlay">
+                                        <img class="movie-card-img" src="{{movie?.portraitImg}}">
+                                    </div>
+                                </ion-col>
+                                <ion-col size="12">
+                                    <p class="sm bold ion-text-left m-0 pt-2">{{movie?.title | shorten: 11}}</p>
+                                </ion-col>
+                                <ion-col size="12">
+                                    <p class="sm color-orange ion-text-left m-0 pt-1">{{printCategories(movie?.categories) | shorten: 15}}</p>
+                                </ion-col>
+                            </ion-row>
+                        </ion-slide>
+                    </ion-slides>
+                </ion-col>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-padding">
+            <ion-col>
+                <p class="movie-title bold">
+                    Coming Soon
+                </p>
+                <ion-col>
+                    <ion-slides [options]="cardOption">
+                        <ion-slide *ngFor="let movie of comingMovies">
+                            <ion-row>
+                                <ion-col size="12">
+                                    <div class="dark-overlay">
+                                        <img class="movie-card-img" src="{{movie?.portraitImg}}">
+                                    </div>
+                                </ion-col>
+                                <ion-col size="12">
+                                    <p class="sm bold ion-text-left m-0 pt-2">{{movie?.title | shorten: 11}}</p>
+                                </ion-col>
+                                <ion-col size="12">
+                                    <p class="sm blue-color ion-text-left m-0 pt-1">{{printCategories(movie?.categories) | shorten: 15}}</p>
+                                </ion-col>
+                            </ion-row>
+                        </ion-slide>
+                    </ion-slides>
+                </ion-col>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-padding">
+            <ion-col>
+                <ion-row>
+                    <ion-col size="12">
+                        <p class="movie-title bold">
+                            Available Movies
+                        </p>
+                    </ion-col>
+                </ion-row>
+                <ion-col>
+                    <ion-slides [options]="cardOption">
+                        <ion-slide *ngFor="let movie of loadedMovies">
+                            <ion-row>
+                                <ion-col size="12" (click)="goToMovie(movie?.id)">
+                                    <div class="dark-overlay">
+                                        <img class="movie-card-img" src="{{movie?.portraitImg}}">
+                                    </div>
+                                </ion-col>
+                                <ion-col size="12">
+                                    <p class="sm bold ion-text-left m-0 pt-2">{{movie?.title | shorten: 11}}</p>
+                                </ion-col>
+                                <ion-col size="12">
+                                    <p class="sm color-orange ion-text-left m-0 pt-1">{{printCategories(movie?.categories) | shorten: 15}}</p>
+                                </ion-col>
+                            </ion-row>
+                        </ion-slide>
+                    </ion-slides>
+                </ion-col>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

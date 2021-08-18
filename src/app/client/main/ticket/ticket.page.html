@@ -1,0 +1,121 @@
+<ion-content color="secondary">
+    <ion-grid>
+        <ion-row>
+            <ion-col size="1" class="ion-no-padding">
+                <ion-back-button class="white" defaultHref="screenings"></ion-back-button>
+            </ion-col>
+            <ion-col size="11" class="ion-no-padding">
+                <p class="centered">Movie Tickets</p>
+            </ion-col>
+        </ion-row>
+        <ion-slides [options]="option" pager="true">
+            <ion-slide *ngFor="let seat of reservation?.seatsReserved">
+                <ion-card color="primary">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="header pl-3 pt-2 m-0">House Of Movies Presents: </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="title pt-2 m-0"> {{reservation?.movie?.title}} </p>
+                        </div>
+                    </div>
+                    <div class="row m-0 p-0">
+                        <div class="col-12 pt-3 p-0">
+                            <img [src]="reservation?.movie?.landscapeImg || '' | safe">
+                        </div>
+                    </div>
+                    <div class="row m-0 p-0">
+                        <div class="col-4 mt-3 p-0 text-center">
+                            <p class="m-0">Room</p>
+                        </div>
+                        <div class="col-4 mt-3 p-0 text-center">
+                            <p class="m-0">Row</p>
+                        </div>
+                        <div class="col-4 mt-3 p-0 text-center">
+                            <p class="m-0">Seat</p>
+                        </div>
+                    </div>
+                    <div class="row m-0 p-0">
+                        <div class="col-4 mt-2 p-0 text-center">
+                            <p>{{reservation?.roomName}}</p>
+                        </div>
+                        <div class="col-4 mt-2 p-0 text-center">
+                            <p>{{seat.row}}</p>
+                        </div>
+                        <div class="col-4 mt-2 p-0 text-center">
+                            <p>{{seat.number}}</p>
+                        </div>
+                    </div>
+                    <div class="break-line mt-1"></div>
+                    <div class="row m-0 p-0">
+                        <div class="col-4 mt-3 p-0 text-center">
+                            <p class="m-0">Price</p>
+                        </div>
+                        <div class="col-4 mt-3 p-0 text-center">
+                            <p class="m-0">Date</p>
+                        </div>
+                        <div class="col-4 mt-3 p-0 text-center">
+                            <p class="m-0">Time</p>
+                        </div>
+                    </div>
+                    <div class="row m-0 p-0">
+                        <div class="col-4 mt-2 p-0 text-center">
+                            <p>{{(reservation?.total || 0)/(reservation?.seatsReserved?.length || 0) | currency}}</p>
+                        </div>
+                        <div class="col-4 mt-2 p-0 text-center">
+                            <p>{{reservation?.date | date}}</p>
+                        </div>
+                        <div class="col-4 mt-2 p-0 text-center">
+                            <p>{{reservation?.date | date: 'shortTime'}}</p>
+                        </div>
+                    </div>
+                    <div class="row m-0 p-0">
+                        <div class="holes-below"></div>
+                    </div>
+                    <div class="break-line mt-2"></div>
+                    <div class="row m-0 p-0">
+                        <div class="col-12 mt-2">
+                            <table class="barcode mt-3">
+                                <tr class="barcode-holder" *ngFor="let val of code.split('')">
+                                    <td [ngClass]="val == '0' ? 'color-white' : 'color-black'"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row m-0 p-0">
+                        <div class="col-12 mt-2">
+                            <table class="numbers">
+                                <tr class="numbers-spacing">
+                                    <td>9</td>
+                                    <td>1</td>
+                                    <td>7</td>
+                                    <td>3</td>
+                                    <td>7</td>
+                                    <td>5</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>4</td>
+                                    <td>1</td>
+                                    <td>4</td>
+                                    <td>7</td>
+                                    <td>8</td>
+                                    <td>7</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>1</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>2</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+    </ion-grid>
+</ion-content>

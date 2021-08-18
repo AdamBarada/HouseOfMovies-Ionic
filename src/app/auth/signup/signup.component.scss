@@ -1,0 +1,87 @@
+.fadeIn {
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.description {
+    font-size: 20px;
+    font-weight: 300;
+    padding: 0 1rem;
+}
+
+input {
+    border: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    caret-color: var(--ion-color-tertiary);
+}
+
+input[type=checkbox] {
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 5px;
+}
+
+button {
+    color: white;
+    background-color: var(--ion-color-tertiary) !important;
+    padding: 5px 20px 5px 20px;
+}
+
+.form-control {
+    color: white;
+}
+
+.input-style {
+    background-color: transparent;
+    border: 1px solid var(--ion-color-secondary);
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.input-style:hover,
+.input-style:focus-within {
+    border: 1px solid var(--ion-color-tertiary);
+}
+
+fa-icon {
+    color: var(--ion-color-tertiary);
+}
+
+.errorClass,
+.errorClass:hover,
+.errorClass:focus-within {
+    border: 1px solid var(--ion-color-danger);
+}
+
+.rounded-edges {
+    border-radius: 20px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.rounded-edges-l {
+    border-radius: 20px 0px 0px 20px;
+}
+
+.btn {
+    position: relative;
+}
+
+.btn:disabled {
+    color: #fff !important;
+    background: var(--ion-color-medium) !important;
+    cursor: not-allowed !important;
+}
+
+.signup {
+    color: var(--ion-color-blue-hint);
+}

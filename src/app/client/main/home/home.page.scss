@@ -1,0 +1,32 @@
+.slides-md {
+    --bullet-background: #ffffff !important;
+    --bullet-background-active: var(--ion-color-tertiary) !important;
+}
+
+p {
+    font-size: 0.9rem;
+}
+
+ion-card {
+    width: 100%;
+    height: 200px;
+    border-radius: 0% 0% 50% 50%/0% 0% 12% 12%;
+    background-size: 100% 100% !important;
+    box-shadow: none;
+}
+
+.blue-color {
+    color: var(--ion-color-blue-hint);
+}
+
+.color-orange {
+    color: var(--ion-color-warning-tint);
+}
+
+.background-trans {
+    background-color: transparent;
+}
+
+.movie-title {
+    font-size: 18px;
+}

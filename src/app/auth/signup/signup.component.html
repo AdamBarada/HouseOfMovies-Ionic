@@ -1,0 +1,70 @@
+<div class="fadeIn">
+    <ion-row class="pr-3 pl-3 p-2">
+        <ion-col class="ion-text-center ion-padding pb-0">
+            <p class="description m-0">
+                Join over 1 thousand movie lover and watch your favorite movies in our theatres.
+            </p>
+        </ion-col>
+    </ion-row>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <ion-row class="pr-3 pl-3 pt-2">
+            <ion-col class="mr-3">
+                <div class="input-group input-style m-2 pr-3 pl-3" [ngClass]="{errorClass : (!fnameCtrl.valid && fnameCtrl.touched)}">
+                    <fa-icon [icon]="faUser"></fa-icon>
+                    <input type="text" name="fname" ngModel class="form-control" #fnameCtrl="ngModel" required autocomplete="off" placeholder="First Name">
+                </div>
+                <ion-item *ngIf="(!fnameCtrl.valid && fnameCtrl.touched)" color="primary" lines="none">
+                    <p> First name is required. </p>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row class="pr-3 pl-3">
+            <ion-col class="mr-3">
+                <div class="input-group input-style m-2 pr-3 pl-3" [ngClass]="{errorClass : (!lnameCtrl.valid && lnameCtrl.touched)}">
+                    <fa-icon [icon]="faUser"></fa-icon>
+                    <input type="text" name="lname" ngModel class="form-control" #lnameCtrl="ngModel" required autocomplete="off" placeholder="Last Name">
+                </div>
+                <ion-item *ngIf="(!lnameCtrl.valid && lnameCtrl.touched)" color="primary" lines="none">
+                    <p> Last name is required. </p>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row class="pr-3 pl-3">
+            <ion-col class="mr-3">
+                <div class="input-group input-style m-2 pr-3 pl-3" [ngClass]="{errorClass : (!emailCtrl.valid && emailCtrl.touched)}">
+                    <fa-icon [icon]="faEnvelope"></fa-icon>
+                    <input type="email" name="email" ngModel class="form-control" #emailCtrl="ngModel" required autocomplete="off" placeholder="Email">
+                </div>
+                <ion-item *ngIf="(!emailCtrl.valid && emailCtrl.touched)" color="primary" lines="none">
+                    <p> Please enter a valid email address. </p>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row class="pr-3 pl-3">
+            <ion-col class="mr-3">
+                <div class="input-group input-style m-2 pr-3 pl-3" [ngClass]="{errorClass : (!passCtrl.valid && passCtrl.touched)}">
+                    <fa-icon [icon]="faLock"></fa-icon>
+                    <input type="password" name="password" #passCtrl="ngModel" ngModel minlength="5" required class="form-control" placeholder="Password">
+                </div>
+                <ion-item *ngIf="(!passCtrl.valid && passCtrl.touched)" color="primary" lines="none">
+                    <p> Please enter a strong password. </p>
+                </ion-item>
+                <ion-col>
+                    <div class="row pr-3 pl-3 pt-3 p-2 mx-auto">
+                        <div class="col text-center">
+                            <button [disabled]="!f.valid" class="btn ion-activatable">
+                          Sign Up
+                          <ion-ripple-effect></ion-ripple-effect>
+                      </button>
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-col>
+        </ion-row>
+    </form>
+    <div class="row pr-3 pl-3 p-2 mx-auto">
+        <div class="col text-center">
+            <p class="pt-3"> Already have an account? <a routerLink="../login" class="signup">Login now.</a></p>
+        </div>
+    </div>
+</div>

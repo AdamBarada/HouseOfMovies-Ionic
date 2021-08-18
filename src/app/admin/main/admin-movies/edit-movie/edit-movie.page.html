@@ -1,0 +1,117 @@
+<ngx-spinner [disableAnimation]="true"></ngx-spinner>
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Edit Movie</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="admin/movies"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12">
+                <div class="col-lg-4 background-primary shadow">
+                    <div class="col-12 pl-0 pt-3 pb-3">
+                        <p class="m-0">
+                            Edit the following form
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col break-line"></div>
+                    </div>
+                    <form #f="ngForm" *ngIf="movie !== undefined" class="pt-3" (keydown.enter)="$event.preventDefault()" (ngSubmit)="(f.valid && durationCtrl.value > 60 && durationCtrl.value < 600 ) ? onSubmit(f) : onFormNotValid()">
+                        <div class="row pt-3">
+                            <div class="col-12 col-md-6">
+                                <div class="row">
+                                    <div class="col-12 pb-3">
+                                        <div class="input-group input-style pr-3 pl-3" [ngClass]="{errorClass : (!titleCtrl.valid && titleCtrl.touched)}">
+                                            <fa-icon [icon]="faFilm" class="form-icon"></fa-icon>
+                                            <input type="text" name="title" [(ngModel)]="movie.title" ngModel class="form-control" #titleCtrl="ngModel" required autocomplete="off" placeholder="Title">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 pb-3">
+                                        <div class="input-group input-style pr-3 pl-3" [ngClass]="{errorClass : (!castCtrl.valid && castCtrl.touched)}">
+                                            <fa-icon [icon]="faUsers" class="form-icon"></fa-icon>
+                                            <input type="text" name="cast" [(ngModel)]="movie.cast" ngModel class="form-control" #castCtrl="ngModel" required autocomplete="off" placeholder="Cast">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 pb-3">
+                                        <div class="input-group input-style pr-3 pl-3" [ngClass]="{errorClass : (!videoCtrl.valid && videoCtrl.touched)}">
+                                            <fa-icon [icon]="faVideo" class="form-icon"></fa-icon>
+                                            <input type="text" name="video" [(ngModel)]="movie.trailer" ngModel class="form-control" #videoCtrl="ngModel" required autocomplete="off" placeholder="Video URL">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 pb-3">
+                                <div class="input-group input-style h-100 pr-3 pl-3" [ngClass]="{errorClass : (!descCtrl.valid && descCtrl.touched)}">
+                                    <fa-icon [icon]="faPencilAlt" class="form-icon textarea-cust"></fa-icon>
+                                    <textarea name="description" #descCtrl="ngModel" [(ngModel)]="movie.description" ngModel minlength="20" required class="form-control" placeholder="Description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 pb-3">
+                                <div class="input-group input-style h-100 pr-3 pl-3" [ngClass]="{errorClass : (!dateCtrl.valid && dateCtrl.touched)}">
+                                    <fa-icon [icon]="faCalendarDay" class="form-icon"></fa-icon>
+                                    <input type="text" class="form-control" [(ngModel)]="selectedDate" #dateCtrl=ngModel required placeholder="Release Date" [bsConfig]="{ isAnimated: true, dateInputFormat: 'MMMM Do YYYY'}" bsDatepicker name="date" ngModel>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 pb-3 my-auto">
+                                <div class="input-group input-style my-auto pr-3 pl-3" [ngClass]="{errorClass : (!categoryCtrl.valid && categoryCtrl.touched)}">
+                                    <fa-icon [icon]="faChartPie" class="form-icon"></fa-icon>
+                                    <ng-multiselect-dropdown class="form-control" name="categories" [(ngModel)]="selectedItems" [placeholder]="'Select categories'" required ngModel #categoryCtrl="ngModel" [settings]="dropdownSettings" [data]="dropdownList">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pb-3">
+                            <div class="col-12 pb-3 my-auto">
+                                <div class="input-group input-style pr-3 pl-3" [ngClass]="{errorClass : (!directorCtrl.valid && directorCtrl.touched)}">
+                                    <fa-icon [icon]="faUserTie" class="form-icon"></fa-icon>
+                                    <input type="text" name="director" [(ngModel)]="movie.director" ngModel class="form-control" #directorCtrl="ngModel" required autocomplete="off" placeholder="Director">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 pb-3 my-auto">
+                                <div class="input-group input-style my-auto pr-3 pl-3">
+                                    <fa-icon [icon]="faImage" class="form-icon"></fa-icon>
+                                    <input type="file" name="landscape" id="landscape" ngModel (change)="onSelectLandscape($event)" />
+                                    <label for="landscape" class="form-control"> Choose the landscape image </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 my-auto">
+                                <div class="input-group input-style my-auto pr-3 pl-3">
+                                    <fa-icon [icon]="faPortrait" class="form-icon"></fa-icon>
+                                    <input type="file" name="portrait" id="portrait" ngModel (change)="onSelectPortrait($event)" />
+                                    <label for="portrait" class="form-control"> Choose the portrait image </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-4 pb-3 my-auto">
+                                <div class="input-group input-style my-auto pr-3 pl-3" [ngClass]="{errorClass : ((!durationCtrl.valid || durationCtrl.value>600 || durationCtrl.value<60) && durationCtrl.touched)}">
+                                    <fa-icon [icon]="faStopWatch" class="form-icon"></fa-icon>
+                                    <input type="number" ngModel class="form-control" [(ngModel)]="movie.duration" name="duration" #durationCtrl="ngModel" required autocomplete="off" placeholder="Duration" class="form-control" min="60" max="600">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 p-0">
+                                <button (click)="reset(f)" type="button" class="btn-custom color-danger ion-activatable"><fa-icon [icon]="faTrash" class="form-icon white pr-2"></fa-icon> Reset Changes
+                                  <ion-ripple-effect></ion-ripple-effect>
+                                </button>
+                            </div>
+                            <div class="col-6 p-0">
+                                <button type="submit" class="btn-custom color-blue  ion-activatable"><fa-icon [icon]="faCheck" class="form-icon white pr-2"></fa-icon> Confirm Changes
+                                  <ion-ripple-effect></ion-ripple-effect>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

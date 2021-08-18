@@ -1,0 +1,80 @@
+:host {
+    --ion-background-color: var(--ion-color-secondary);
+    --padding-top: 20px;
+    --padding-bottom: 20px;
+}
+
+:host(.button-full:not(.button-round)) .button-native {
+    border-radius: 50% 50% 0% 0%/8% 8% 0% 0% !important;
+}
+
+p {
+    font-size: 0.9rem;
+}
+
+ion-card.img-container {
+    width: 100%;
+    height: 200px;
+    box-shadow: none;
+    border-radius: 0% 0% 50% 50%/0% 0% 12% 12%;
+    background-size: 100% 100% !important;
+    box-shadow: none;
+}
+
+ion-card.desc-container {
+    margin: 0;
+    padding-top: 1.5rem;
+    border-radius: 50% 50% 0% 0%/6% 6% 0% 0%;
+    background-size: 100% 100% !important;
+    --ion-card-background: var(--ion-color-primary);
+    box-shadow: none;
+}
+
+.blue-color {
+    color: var(--ion-color-blue-hint);
+}
+
+.color-orange {
+    color: var(--ion-color-warning-tint);
+}
+
+.background-trans {
+    background-color: transparent;
+}
+
+.movie-title {
+    font-size: 18px;
+}
+
+.color-gray {
+    color: var(--ion-color-step-650);
+}
+
+.color-white {
+    color: white;
+}
+
+.background-blue {
+    background-color: var(--ion-color-tertiary)
+}
+
+.category-container {
+    padding: 5px 15px;
+    border-radius: 30px;
+}
+
+fa-icon {
+    padding-right: 0.5rem;
+    color: var(--ion-color-tertiary);
+}
+
+ion-button {
+    --padding-top: 15px;
+    --padding-bottom: 15px;
+    height: auto;
+    --box-shadow: none;
+    --border-radius: 50% 50% 0% 0%/30% 30% 0% 0% !important;
+    --background: var(--ion-color-secondary);
+    text-transform: none;
+    margin-inline: 0 !important;
+}

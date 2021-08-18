@@ -1,0 +1,110 @@
+<ngx-spinner [disableAnimation]="true"></ngx-spinner>
+<ng-template #template2>
+    <div class="modal-body mx-auto confirm-modal">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-1 ml-0 pl-0">
+                    <fa-icon [icon]="faMinusCircle" class="icon-danger pr-2"></fa-icon>
+                </div>
+                <div class="col-11 my-auto">
+                    <p class="confirm-title pl-1">
+                        Delete Reservation</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 offset-1">
+                    <p class="confirm-text pl-1"> Are you sure you want to proceed? Deleting reservations cannot be undone.</p>
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col-5 offset-1">
+                    <button class="button-confirm" (click)="onDeleteReservation(currentReservation)">Delete</button>
+                </div>
+                <div class="col-5 mr-2 pl-0">
+                    <button class="button-reject" (click)="decline()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ion-content *ngIf="showedReservations.length !== 0 && reservations.length !== 0">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+        <ion-row class="ion-no-padding header-style pt-3">
+            <ion-col size="12" class="ion-text-center pb-0">
+                <p class="title m-0"> Reservations </p>
+            </ion-col>
+            <ion-col size="12" class="ion-text-center p-0">
+                <p class="font-title gray m-0 pb-2">{{reservations?.length}} available reservations.</p>
+            </ion-col>
+        </ion-row>
+        <ion-item-sliding *ngFor="let reservation of showedReservations" #slidingReservation>
+            <ion-item class="mb-2 mt-3" color="primary" lines="none">
+                <ion-col size="3" class="my-auto text-center">
+                    <div class="wrapper">
+                        <img class="img-style" src="{{reservation.movie.portraitImg}}">
+                        <ion-icon name="play-circle-outline" class="centered" (click)="openTrailer(reservation.movie.trailer)"></ion-icon>
+                    </div>
+                </ion-col>
+                <ion-col size="9" class="mt-1 pt-0">
+                    <ion-row>
+                        <ion-col size="7" class="pb-0 pt-0 my-auto">
+                            <p class="m-0 font-movie-title left">{{reservation.movie.title | shorten: 13}} </p>
+                        </ion-col>
+                        <ion-col size="5" class="text-right">
+                            <span class="pl-2 info font-sm mt-1" [class.upcoming]="reservation.status === 'AVAILABLE'" [class.started]="reservation.status !== 'AVAILABLE'"> {{reservation.status === "AVAILABLE" ? 'Upcoming' : 'Past'}} </span>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="12" class="pr-0">
+                            <p class="m-0 font-sm"> {{reservation.date | date}}, {{reservation.date | date:'shortTime'}} </p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="3" class="pr-0">
+                            <p class="m-0 font-sm"> {{reservation.roomName}}</p>
+                        </ion-col>
+                        <ion-col size="1" class="ion-text-center pr-0 pl-0">
+                            <p class="m-0 font-sm"> &#9679;</p>
+                        </ion-col>
+                        <ion-col size="3" class="ion-text-center pr-0 pl-0">
+                            <p class="m-0 font-sm color-currency"> {{reservation.total | currency}}</p>
+                        </ion-col>
+                        <ion-col size="1" *ngIf="reservation.status === 'AVAILABLE'" class="ion-text-center pr-0 pl-0">
+                            <p class="m-0 font-sm"> &#9679;</p>
+                        </ion-col>
+                        <ion-col size="4" *ngIf="reservation.status === 'AVAILABLE'" class="ion-text-center pr-0 pl-0">
+                            <p class="m-0 font-sm color-success" routerLink="/ticket" [queryParams]="{id: reservation.id}"> View tickets </p>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-item>
+            <ion-item-options *ngIf="reservation.status === 'AVAILABLE'">
+                <ion-item-option class="mb-2 mt-3" color="danger">
+                    <ion-icon name="trash" slot="icon-only" (click)="openModal(template2, reservation.id, slidingReservation)"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+        <ion-infinite-scroll [disabled]="showedReservations.length === reservations.length" threshold="100px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more reservations...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </ion-grid>
+</ion-content>
+<ion-content *ngIf="showedReservations.length === 0 || reservations.length === 0">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+        <ion-row class="ion-no-padding header-style pt-3">
+            <ion-col size="12" class="ion-text-center pb-0">
+                <p class="title m-0"> Reservations </p>
+            </ion-col>
+            <ion-col size="12" class="ion-text-center p-0">
+                <p class="font-title gray m-0 pb-2">0 available reservations.</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,3 +1,77 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+    <ion-menu side="start" menuId="custom" contentId="main" color="secondary">
+        <ion-content>
+            <ion-grid class="ion-no-padding">
+                <ion-row>
+                    <ion-col size="12" class="text-center pt-3">
+                        <img src="../assets/images/logo.png" class="logo-img p-1">
+                    </ion-col>
+                </ion-row>
+                <ion-list class="menu-items pt-4" lines="none">
+                    <ion-menu-toggle>
+                        <a routerLink="/admin/home">
+                            <div routerLinkActive="active">
+                                <div class="spacing">
+                                </div>
+                                <ion-item>
+                                    <ion-icon name="home">
+                                    </ion-icon>
+                                    <span class="pl-3">Home</span>
+                                </ion-item>
+                                <div class="spacing">
+                                </div>
+                            </div>
+                        </a>
+                    </ion-menu-toggle>
+                    <ion-menu-toggle>
+                        <a routerLink="/admin/movies">
+                            <div routerLinkActive="active">
+                                <div class="spacing">
+                                </div>
+                                <ion-item>
+                                    <ion-icon name="videocam">
+                                    </ion-icon>
+                                    <span class="pl-3">Movies</span>
+                                </ion-item>
+                                <div class="spacing">
+                                </div>
+                            </div>
+                        </a>
+                    </ion-menu-toggle>
+                    <ion-menu-toggle>
+                        <a routerLink="/admin/screenings">
+                            <div routerLinkActive="active">
+                                <div class="spacing">
+                                </div>
+                                <ion-item>
+                                    <ion-icon name="tv">
+                                    </ion-icon>
+                                    <span class="pl-3">Screenings</span>
+
+                                </ion-item>
+                                <div class="spacing">
+                                </div>
+                            </div>
+                        </a>
+                    </ion-menu-toggle>
+                    <ion-menu-toggle>
+                        <a routerLink="/auth/login">
+                            <div routerLinkActive="active">
+                                <div class="spacing">
+                                </div>
+                                <ion-item>
+                                    <ion-icon name="log-out">
+                                    </ion-icon>
+                                    <span class="pl-3">Logout</span>
+                                </ion-item>
+                                <div class="spacing">
+                                </div>
+                            </div>
+                        </a>
+                    </ion-menu-toggle>
+                </ion-list>
+            </ion-grid>
+        </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>
